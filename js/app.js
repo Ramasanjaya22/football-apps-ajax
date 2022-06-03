@@ -18,12 +18,29 @@ function getTeam(teamName) {
     content.innerHTML = progressBar;
     // TODO: Write Ajax Function Here!
     // or look branch for sample implementing request
+    // const asyncRequestObject = new XMLHttpRequest();
+    // asyncRequestObject.open('GET', BASE_URL + teamName);
+    // asyncRequestObject.onload = function handleSuccess() {
+    //     const data = JSON.parse(this.responseText);
+    //     showTeam(data)
+    // };
+    // asyncRequestObject.onerror = function handleError() {
+    //     console.log('Ups, Failed to load data :(')
+    // };
+    // asyncRequestObject.send()
+
+    //using AJAX
+    $.ajax({
+        url: BASE_URL + teamName
+    }).done(showTeam).fail(function (err) {
+        console.log(err)
+    })
 }
 
 function showTeam(data) {
     let responseText = `<div class="row">`;
 
-    if(data.teams !== null) {
+    if (data.teams !== null) {
         data.teams.forEach(function (item) {
             responseText += `<div class="col s12 m6 l4"> <div class="card">
         <div class="card-image">
